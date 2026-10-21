@@ -1,0 +1,9 @@
+# M1A – Isolierter Event-Bridge-Spool (21.10.2026)
+
+**PARTIAL PASS (synthetische Cursor-/Crash-Sicherheit), externer SDK-Eventfeed NOT IMPLEMENTED.**
+
+`event_bridge_spool.py` legt in einem explizit privaten Stateverzeichnis einen einmaligen Scope-Cursor in einer 0600-Datei ab und übernimmt danach validierte SDK-kompatible Eventbatches in einen 0600-Pending-Record mit atomarem Replace und fsync. Bis zur gesonderten, noch nicht implementierten Verarbeitung und deren nachgewiesener Bestätigung wird der Cursor nicht fortgeschrieben. Existiert bei Wiederanlauf ein Pending-Batch, wird jeder weitere Batch fail-closed abgelehnt; weder automatische Replay-Ausführung noch angeblicher Erfolg. Refresh/fast-forward, ungültige IDs, falscher Scope und unsichere State-Rechte sind ebenfalls blockiert. Der Zustand ist ausschließlich Test-/Bridge-State, kein produktiver Sync-State.
+
+**Wichtige Grenzen:** Kein Netzwerk-/SDK-Subscription-Code, keine echte Eventzustellung, keine commit-/ack-Logik nach wirksamem Dateisync, noch keine Interprozess-Sperre für parallel laufende Bridge-Writers, keine gesicherte Vollständigkeit des Cursorstreams. Ohne diese Gates darf die Bridge nicht für Dateisynchronisation aktiviert werden. `initialize_cursor` ist allein eine isolierte Testinitialisierung, **keine** vertrauenswürdige Bootstrap-Quelle. M1A bleibt offen und öffentlicher Release NO-GO.
+
+MVP-Lagebeurteilung: Grobe Entwicklungsaufwandsschätzung ca. 70–75 % bis zu einem **begrenzten technisch funktionsfähigen Pilot** (keine formale Abnahme), nicht bis zum öffentlichen Release. Blocker: Cloud-Events / Anbieterbedingungen, atomare Revisionsänderung oder ausdrücklich reduzierte Schreibsemantik, echtes GUI-/Accessibility-E2E, versionierter Live-Upgrade-/Rollback-Test, Review der CLI-Session- und Cache-Sicherheit. Keine produktiven Dienste berührt.

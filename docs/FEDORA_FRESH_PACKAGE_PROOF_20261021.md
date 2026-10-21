@@ -1,0 +1,5 @@
+# Fedora Fresh-Package Installation Check — 2026-10-21
+
+**PASS, bounded smoke-test only.** On the existing isolated Fedora 44 VM with the exact disposable-VM marker, an unmodified candidate was built from the current repository with `scripts/build_fedora_mvp.py`, transferred as an archive, and installed into an unused temporary prefix via `scripts/install_fedora_mvp.py`. The installed launcher ran `--self-test` successfully (`L10N_OK 62`, `BACKEND_OK 5`); installed units were absent throughout the check.
+
+No cloud authentication, cloud operation, systemd installation, timer enablement, existing sync user-data migration, or production service change was performed. This is **not** a proof of a complete portable synchronization setup, user-facing onboarding, or uninstallation after activation. The release remains blocked on a truly fresh-profile GUI workflow with an explicit isolated account, a safe configurable runtime profile, standalone installation instructions, rollback, and user acceptance.

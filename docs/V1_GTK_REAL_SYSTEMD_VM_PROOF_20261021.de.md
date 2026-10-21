@@ -1,0 +1,9 @@
+# V1 – GTK → echtes systemd im isolierten Fedora-44-Gast (21.10.2026)
+
+**PASS innerhalb des isolierten VM-Testscopes.** Ausgeführt mit `PYTHONPATH=src:. xvfb-run -a python3 scripts/probe_gtk_v1_real_systemd_vm.py`. Ergebnis: `REAL_SYSTEMD_INSTALL_PASS`, `REAL_SYSTEMD_ENABLE_PASS`, `REAL_SYSTEMD_PAUSE_PASS`, `REAL_SYSTEMD_UNINSTALL_PASS`, `V1_GTK_REAL_SYSTEMD_VM_PASS`; Prozess-Exit 0.
+
+Der Test setzt einen eindeutigen VM-Marker (`/etc/proton-mvp-disposable-vm` mit `VM_TEST_ONLY_NO_CLOUD`) sowie den isolierten User `mvptest` und einen separaten User-Runtime-Mount voraus. Bereits vorhandene isolierte Test-Units oder eine Testkonfiguration führen vor Beginn zu BLOCKED. Die GUI verwendet reale GTK4/libadwaita-Buttons und Dialoge; nach Cancel bleibt die echte systemd-Lifecycle-Statusabfrage unverändert. Confirm ruft die unveränderten Backend-Methoden `install`, `enable`, `pause`, `uninstall` auf; nach jeder Aktion wird deren tatsächlicher systemd-Zustand über `lc.status()` überprüft.
+
+Die einzige umgeleitete Abhängigkeit ist die Bundle-Auflösung: sie verweist auf ein im Test temporär erzeugtes, manifestiertes Paket mit einem **cloudfreien Shell-Stub** (`exit 0`) anstelle der Sync-Engine. Die Manifest-Prüfung dieses Pakets bleibt aktiv; die echten systemd-Kommandos sind nicht gemockt. Eine echte Cloud-Anmeldung oder Datenübertragung fand nicht statt. Am Ende wurden die zwei VM-Test-Units über den normalen Lifecycle entfernt; temporäre Testkonfiguration und -ordner wurden zurückgebaut.
+
+**Grenzen:** GTK-Signale wurden programmatisch ausgelöst, nicht über Maus/Tastatur; Xvfb ist kein vollständiger GNOME-/Screenreader-Test. Dieser Nachweis belegt die GUI→systemd-Steuerkette und sichere Lifecycle-Zustände, **nicht** einen echten Proton-Sync oder eine Produktionsfreigabe. V1-Cloud-Negativpfade, Endnutzer-Eingabeführung und abschließende Pilot-Abnahme bleiben offen.

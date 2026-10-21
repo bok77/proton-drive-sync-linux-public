@@ -1,0 +1,7 @@
+# M1A – Live-Proof Preflight (21.10.2026)
+
+**BLOCKED: Eine echte Event-Subscription wurde nicht gestartet.** Read-only Prüfung auf dem Fedora-Host: Node v24.18.0 vorhanden; Bun nicht installiert; kein versioniert installiertes SDK im Projekt; isolierte SDK-Test-Session nicht als unabhängig und freigegeben nachgewiesen. Die produktive Proton-CLI-Sitzung und die vier produktiven Sync-Dienste wurden nicht verwendet oder verändert.
+
+`src/proton_sync_engine/sdk_live_preflight.py` bewertet Laufzeit, den vorhandenen Pfad zu einem künftig überprüften SDK-Manifest, die isolierte Testkonfiguration und eine ausdrücklich belegte Test-Session. Fehlende Voraussetzungen führen zu einzelnen benannten Blockern; selbst alle erfüllten Inputs erlauben ohne gesondertes Human-Live-Proof-Gate keine automatische Aktivierung. Tests decken die Blockade und die manuelle Grenze ab. Dies ist eine Vorprüfung, keine SDK-Authentifizierung und keine formale Hersteller-Kompatibilitätsprüfung.
+
+**Nächste zulässige Umsetzung:** Offizielles SDK mit festem Release und überprüftem Lockfile in einem isolierten Testverzeichnis bereitstellen, Authentifizierung unabhängig von produktiver CLI und ohne Offenlegung bestehender Tokens nachweisen, dann echte `iterateEvents`-Subscription nur für den Test-Scope mit manueller Freigabe. Vor Cursor-Ack sind weiterhin Fencing, Durability, Recovery und Ereignislücken-Proof erforderlich. Release NO-GO.

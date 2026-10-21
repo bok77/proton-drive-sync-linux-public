@@ -1,0 +1,7 @@
+# M1A – Isolierte Node→Python-IPC-Übernahme (21.10.2026)
+
+**Synthetischer realer Prozessgrenzen-Proof PASS, Proton-SDK-Live-Subscription BLOCKED.**
+
+Der unabhängige Node-Prozess `bridge/sdk_event_ipc_emit_fixture.mjs` emittiert exakt eine SDK-kompatible Node-Event-Nachricht als JSON-Line. Der echte Python-Subprozess-Test übergibt diese Nachricht an `event_bridge_ipc.ingest_line`, welcher strikt zulässige Envelope- und Eventfelder, UTF-8 und das 8192-Byte-Limit validiert. Anschließend wird die Nachricht im privaten 0600-Pending-Spool persistiert, während der bestätigte Cursor unverändert bleibt. Fehlerhafte oder zusätzliche Felder, falscher Scope, übergroße Nachrichten und ungültiges JSON werden blockiert. Der Node-Prozess entfernt nicht erlaubte Zusatzfelder. Test: `tests/test_event_bridge_subprocess.py`; CI führt Node- und Python-Tests aus.
+
+Dies ist ausdrücklich ein **synthetischer Fixture-Emitter**, kein echter offizieller Proton-SDK-Import und kein authentifizierter Cloud-Eventfeed. Der Node→Python-Transport wurde in einer Prozessausführung getestet, **kein** gehärteter langlebiger IPC-Dienst. Wichtige offene Gates: versionsgepinnter SDK-Client und isolierte Authentifizierung, langlebige sichere IPC-Verbindung, Fencing/Mehrprozess-Sperre, Replay-/Gap-Erkennung, idempotente Dateiverarbeitung, vollständige Evidence-gebundene Cursor-Bestätigung und Provider-Konformitätsprüfung. Kein produktiver Service oder Cloud-Dateizugriff. M1A weiter offen, öffentlicher Release NO-GO.

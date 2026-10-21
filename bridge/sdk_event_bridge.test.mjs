@@ -1,0 +1,12 @@
+import assert from 'node:assert/strict';
+import {createEventRelay} from './sdk_event_bridge.mjs';
+let callback,disposed=0;const events=[],blocked=[];
+const relay=createEventRelay({scopeId:'scope',subscribe:async(cb)=>{callback=cb;return {dispose:async()=>{disposed++}}},emit:async(v)=>events.push(v),onBlocked:async(v)=>blocked.push(v)});
+await relay.start();
+await callback({type:'node_updated',treeEventScopeId:'scope',eventId:'next',nodeUid:'node',secret:'NEVER_FORWARD'});
+assert.equal(events.length,1);assert.equal(JSON.stringify(events).includes('NEVER_FORWARD'),false);
+await callback({type:'tree_refresh',treeEventScopeId:'scope',eventId:'later'});
+assert.equal(relay.blocked,true);assert.equal(disposed,1);assert.deepEqual(blocked,['EVENT_BRIDGE_BLOCKED']);
+await callback({type:'node_updated',treeEventScopeId:'scope',eventId:'later',nodeUid:'node'});
+assert.equal(events.length,1);
+console.log('SDK_EVENT_RELAY_ISOLATED_PASS');

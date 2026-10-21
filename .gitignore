@@ -1,0 +1,32 @@
+# Python build
+__pycache__/
+*.pyc
+.pytest_cache/
+.venv/
+dist/
+build/
+*.egg-info/
+
+# Private state and secrets
+.env
+.env.*
+settings.json
+baseline.json
+local_stat_cache.json
+*.sqlite*
+*.db
+*.log
+events.jsonl
+health.json
+pending_changes.json
+reconcile_candidates.json
+remote_missing_candidates.json
+*.key
+*.pem
+*.token
+.auth/
+.proton-drive/
+.user-data/
+data/
+secrets/
+backups/

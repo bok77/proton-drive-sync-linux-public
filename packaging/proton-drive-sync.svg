@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
+ <defs>
+  <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+   <stop offset="0" stop-color="#1979f5"/><stop offset="0.55" stop-color="#6052db"/><stop offset="1" stop-color="#a14cf1"/>
+  </linearGradient>
+  <linearGradient id="halo" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffffff" stop-opacity=".3"/><stop offset="1" stop-color="#ffffff" stop-opacity="0"/></linearGradient>
+  <filter id="s"><feGaussianBlur stdDeviation="2"/></filter>
+ </defs>
+ <rect x="6" y="7" width="116" height="116" rx="29" fill="#241c58" opacity=".14" filter="url(#s)"/>
+ <rect x="4" y="4" width="120" height="120" rx="28" fill="url(#g)"/>
+ <path d="M21 17Q35 9 61 11Q98 11 111 40L112 57Q93 35 68 37Q39 38 21 58Z" fill="url(#halo)"/>
+ <path d="M32 85a22 22 0 0 1-5-43 31 31 0 0 1 59-4 22 22 0 0 1 9 43" fill="none" stroke="#fff" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+ <path d="M49 57l12-12 12 12m-12-12v37" fill="none" stroke="#fff" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+ <path d="M82 69l-10 10-10-10m10 10V53" fill="none" stroke="#c5f9ff" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+ <circle cx="95" cy="91" r="13" fill="#20cf9c" stroke="#fff" stroke-width="3"/>
+ <path d="m88 91 5 5 9-10" fill="none" stroke="#fff" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

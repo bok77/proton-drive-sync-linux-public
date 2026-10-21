@@ -1,0 +1,5 @@
+# V1 – Reale Tastaturereignisse in isolierter Fedora-44-VM
+
+**Teilnachweis PASS:** `scripts/probe_gtk_v1_keyboard_vm.py` sendet in Xvfb echte X11-Tastatureingaben mittels `xdotool` an GTK4/libadwaita. Auf einem fokussierten Installieren-Button öffnet `Return` den echten Bestätigungsdialog; `Escape` schließt ihn ohne Backend-Mutation. Ausgabe `V1_REAL_KEY_ENTER_DIALOG_ESC_NO_MUTATION_PASS` (Exit 0). Backend gemockt; kein Zugriff auf Proton-Konto, Session, Netzwerk oder Host-systemd.
+
+**Offen:** Wiederherstellung des tatsächlichen Tastaturfokus nach Schließen des modalen Dialogs. Ein anschließender `grab_focus()`- und `has_focus()`-Check lief unter Xvfb in einen Timeout. Damit ist Tab/Shift+Tab nicht bestanden, auch wenn die entsprechenden Tasten grundsätzlich über `xdotool` sendbar sind. Eine vollständige GNOME-Session ist in dieser VM bislang nicht installiert; Screenreader- und Endnutzer-GNOME-Abnahme bleibt offen. Die bereits im Code ergänzte Idle-Fokusrückgabe wird nicht als bewiesen ausgewiesen.
