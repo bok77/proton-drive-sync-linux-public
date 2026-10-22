@@ -4,7 +4,7 @@
 
 Eine native GNOME-Oberfläche für eine bidirektionale Proton-Drive-Synchronisierung unter Linux, bei der Datensicherheit und Wiederherstellbarkeit im Mittelpunkt stehen.
 
-**Status: lokale Alpha-Vorschau. Nicht veröffentlicht und nicht für fremde Konten oder ungesicherte Datenbestände freigegeben.**
+**Status: öffentlich einsehbarer experimenteller Quellcode. Kein freigegebener Synchronisierungsclient.**
 
 **Die bisherige Entwickleroberfläche darf nicht als allgemeiner Synchronisationsclient eingesetzt werden.** Für den öffentlichen Betrieb fehlen noch Freigaben.
 

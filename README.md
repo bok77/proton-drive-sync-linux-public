@@ -4,7 +4,7 @@
 
 A native GNOME desktop interface for a safety-first, bidirectional Proton Drive synchronization workflow on Linux.
 
-**Status: private experimental alpha; NOT a supported public release.**
+**Status: public experimental source preview; NOT a supported syncing release.**
 
 **Do not run the legacy developer dashboard against another account or valuable files.** The public-alpha mode is strictly experimental; installation and account independence are not yet accepted for a supported sync release. The one-time supervised GTK-to-Proton test succeeded on Fedora, but existing remote-file updates, unattended operation, and clean installation for third parties remain unsupported.
 
